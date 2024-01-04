@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (userData) => {
     try {
-      const response = await fetch("http://localhost:5000/register", {
+      const response = await fetch("http://localhost:5000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -22,8 +22,10 @@ export const AuthProvider = ({ children }) => {
         throw new Error(errorData.error);
       }
   
-      const responseData = await response.json();
-      console.log("Success:", responseData.message);
+     
+      navigate('/')
+      setIsAuthenticated(true)
+      
     } catch (error) {
       console.error("Error:", error.message);
 
@@ -31,6 +33,7 @@ export const AuthProvider = ({ children }) => {
   };
   const register = async (userData) => {
     try {
+      
       const response = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: {
@@ -38,14 +41,17 @@ export const AuthProvider = ({ children }) => {
         },
         body: JSON.stringify(userData),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error);
       }
-  
-      const responseData = await response.json();
-      console.log("Success:", responseData.message);
+      if(response.ok){
+        console.log('asd');
+      }
+      navigate('/')
+      setIsAuthenticated(true)
+      
     } catch (error) {
       console.error("Error:", error.message);
 
@@ -54,6 +60,7 @@ export const AuthProvider = ({ children }) => {
   const contextValues = {
     isAuthenticated,
     login,
+    register
   };
 
   return (

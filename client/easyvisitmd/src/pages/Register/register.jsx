@@ -2,28 +2,47 @@ import useForm from "../../hooks/useForm";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
-import "./login.css";
+import "./register.css";
 const defaultValues = {
   Email: "email",
   Password: "password",
+  Name:'name',
+  Family: 'family'
 };
 
-export default function Login() {
-  const {login} = useContext(AuthContext);
-  const loginHandler = async() => {
-    console.log('asd');
-    await login(values);
+export default function Register() {
+  const {register} = useContext(AuthContext);
+  const registerHandler = async() => {
+    await register(values);
   };
-  const { onChange, onSubmit, values } = useForm(loginHandler, {
+  const { onChange, onSubmit, values } = useForm(registerHandler, {
     [defaultValues.Email]: "",
     [defaultValues.Password]: "",
+    [defaultValues.Name]: "",
+    [defaultValues.Family]: "",
   });
 
   
   return (
     <div className="login-container">
       <form onSubmit={onSubmit}>
-        <h2>Вход</h2>
+        <h2>Регистрация</h2>
+        <label htmlFor={defaultValues.Email}>Собствено име:</label>
+        <input
+          type="text"
+          name={defaultValues.Name}
+          value={values[defaultValues.Name]}
+          onChange={onChange}
+          required
+        />
+        <label htmlFor={defaultValues.Family}>Фамилия:</label>
+        <input
+          type="text"
+          name={defaultValues.Family}
+          value={values[defaultValues.Family]}
+          onChange={onChange}
+          required
+        />
         <label htmlFor={defaultValues.Email}>Имейл:</label>
         <input
           type="text"
@@ -44,14 +63,13 @@ export default function Login() {
 
         <button type="submit">Вход</button>
       </form>
-      <p>Забравена парола?</p>
-
+      
       <Link
         className="register"
         style={{ textDecoration: "none", color: "black" }}
-        to="/register"
+        to="/login"
       >
-        Нямате Регистрация?
+        Имате Регистрация?
       </Link>
     </div>
   );

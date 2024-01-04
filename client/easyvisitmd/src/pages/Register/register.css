@@ -60,6 +60,7 @@
     cursor: pointer;
   }
   .register {
+    margin-top: 40px;
     padding: 12px;
     background-color: #fff !important;
     border: 1px solid transparent;

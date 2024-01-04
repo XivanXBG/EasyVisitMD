@@ -11,7 +11,7 @@ const defaultValues = {
 export default function Login() {
   const {login} = useContext(AuthContext);
   const loginHandler = async() => {
-    console.log('asd');
+
     await login(values);
   };
   const { onChange, onSubmit, values } = useForm(loginHandler, {
