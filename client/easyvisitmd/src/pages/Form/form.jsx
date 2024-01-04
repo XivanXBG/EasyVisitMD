@@ -12,13 +12,13 @@ export default function Form() {
     console.log(values);
   };
 
-  console.log(defaultValues);
+  
   const { onChange, onSubmit, values } = useForm(submitHandler, {
     [defaultValues.Location]: "",
     [defaultValues.NameDoc]: "",
     [defaultValues.Specialty]: "",
   });
-  console.log(onChange);
+
   return (
     <div className={styles.container}>
       <h3>Намерете лекар и резервирайте час за преглед онлайн</h3>

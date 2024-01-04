@@ -15,35 +15,35 @@ const Specialty = ({ customDispatch }) => {
     <>
 
         <div onClick={() => handleSearch("Акушер-гинеколог")} className="card">
-        <i class="fa-solid fa-venus"></i>
+        <i className="fa-solid fa-venus"></i>
           <span>Акушер-гинеколог</span>
         </div>
         <div onClick={() => handleSearch("Педиатър")} className="card">
-          <i class="fa-solid fa-child"></i>
+          <i className="fa-solid fa-child"></i>
           <span>Педиатър</span>
         </div>
         <div onClick={() => handleSearch("УНГ")} className="card">
-          <i class="fa-solid fa-ear-listen"></i>
+          <i className="fa-solid fa-ear-listen"></i>
           <span>УНГ</span>
         </div>
         <div onClick={() => handleSearch("Невролог")} className="card">
-          <i class="fa-solid fa-brain"></i>
+          <i className="fa-solid fa-brain"></i>
           <span>Невролог</span>
         </div>
         <div onClick={() => handleSearch("Офталмолог")} className="card">
-          <i class="fa-solid fa-eye"></i>
+          <i className="fa-solid fa-eye"></i>
           <span>Офталмолог</span>
         </div>
         <div onClick={() => handleSearch("Ортопед")} className="card">
-          <i class="fa-solid fa-bone"></i>
+          <i className="fa-solid fa-bone"></i>
           <span>Ортопед</span>
         </div>
         <div onClick={() => handleSearch("Кардиолог")} className="card">
-          <i class="fa-solid fa-heart-pulse"></i>
+          <i className="fa-solid fa-heart-pulse"></i>
           <span>Кардиолог</span>
         </div>
         <div onClick={() => handleSearch("Стоматолог")} className="card">
-          <i class="fa-solid fa-tooth"></i>
+          <i className="fa-solid fa-tooth"></i>
           <span>Стоматолог</span>
         </div>
     
