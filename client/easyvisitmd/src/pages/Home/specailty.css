@@ -1,0 +1,27 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(198, 255, 255);
+  border-radius: 20px;
+  height: 200px;
+  width: auto;
+  justify-content: center;
+  align-items: center;
+}
+.card:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.card i {
+  font-size: 80px;
+  background-color: white;
+  padding: 20px;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

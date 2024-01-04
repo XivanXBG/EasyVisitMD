@@ -1,10 +1,30 @@
-.image img{
-    object-fit: contain;
-    height: 600px;
+.image img {
+  object-fit: cover;
+  width: 100%;
+  border-radius: 20px;
 }
-.search{
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    margin: 50px 400px;
+.image{
+  width: auto;
+  
+}
+.wrapper {
+  margin: 50px 400px;
+}
+.search {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  gap: 50px;
+}
+.specialties {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 30px;
+}
+h4{
+    font-size: 20px;
+    text-align: center;
+}
+.card{
+  background-color: black;
 }

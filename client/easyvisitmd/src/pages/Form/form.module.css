@@ -1,0 +1,47 @@
+.searchForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+.searchForm select,input{
+    padding: 15px;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.searchForm select:focus {
+   
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);  
+}
+.searchForm input:focus {
+   
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);  
+}
+.searchForm select option{
+    
+    font-size: 15px;
+}
+.container h3{
+    font-size: 40px;
+    
+}
+.container h5{
+    font-size: 20px;
+    margin: 0px;
+    margin-bottom: 10px;
+    
+}
+.submitButton{
+    height: 50px;
+    width:140px;
+    border: 0.5px solid black;
+    border-radius: 10px;
+    background-color: #50C878;
+    color: white;
+}
+.submitButton:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: #45ae68;
+}
