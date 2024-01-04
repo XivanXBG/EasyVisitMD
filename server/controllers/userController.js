@@ -16,7 +16,7 @@ router.get('/usersAll', async (req, res) => {
   
   router.post('/usersCreate', async (req, res) => {
     try {
-      console.log(req.body);
+      console.log(req);
       const newUser = await userService.register({ username: 'Pesho@gmail.com', password: '123456' });
       res.json(newUser);
     } catch (error) {
