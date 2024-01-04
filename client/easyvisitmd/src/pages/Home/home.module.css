@@ -1,0 +1,10 @@
+.image img{
+    object-fit: contain;
+    height: 600px;
+}
+.search{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin: 50px 400px;
+}

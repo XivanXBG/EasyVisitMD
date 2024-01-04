@@ -1,0 +1,13 @@
+.navigation{
+    display: flex;
+   
+    margin: 10px 150px;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    max-height: 60px;
+}
+.headerLogo{
+    object-fit: cover;
+    height: 60px;
+}
