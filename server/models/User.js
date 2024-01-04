@@ -11,11 +11,11 @@ const userSchema = new mongoose.Schema({
     //     required: [true, "Family name is required!"],
     //     minLength: [3, "Family name must be at least 3 characters long!"]
     // },
-    username: {
+    email: {
         type: String,
-        required: [true, "Username is required!"],
-        minLength: [10, "Username must be at least 10 characters long!"],
-        unique: { value: true, message: "Username already exists!" },
+        required: [true, "Email is required!"],
+        minLength: [10, "Email must be at least 10 characters long!"],
+        unique: { value: true, message: "Email already exists!" },
     },
     password: {
         type: String,

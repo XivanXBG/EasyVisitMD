@@ -1,5 +1,7 @@
 import useForm from "../../hooks/useForm";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../../contexts/AuthContext";
 import "./login.css";
 const defaultValues = {
   Email: "email",
@@ -7,13 +9,17 @@ const defaultValues = {
 };
 
 export default function Login() {
-  const loginHandler = () => {
-    console.log(values);
+  const {login} = useContext(AuthContext);
+  const loginHandler = async() => {
+    console.log('asd');
+    await login(values);
   };
   const { onChange, onSubmit, values } = useForm(loginHandler, {
     [defaultValues.Email]: "",
     [defaultValues.Password]: "",
   });
+
+  
   return (
     <div className="login-container">
       <form onSubmit={onSubmit}>
