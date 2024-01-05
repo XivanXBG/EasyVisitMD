@@ -25,7 +25,12 @@ const userSchema = new mongoose.Schema({
         required: [true, "Password is required!"],
         minLength: [4, "Password must be at least 4 characters long!"],
     },
+    role: {
+        type: String,
+        default: "user", // Set the default role to "user"
+    },
 });
+
 
 
 

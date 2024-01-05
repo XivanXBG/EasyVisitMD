@@ -1,12 +1,30 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
+
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  function saveAuthTokenToLocalStorage(token) {
+    localStorage.setItem("authToken", token);
+  }
+  function removeAuthTokenFromLocalStorage() {
+    localStorage.removeItem("authToken");
+  }
+  function isAuthenticated() {
+    const authToken = localStorage.getItem("authToken");
+    return authToken !== null;
+  }
 
+  const navigate = useNavigate();
+  
+  const logout = () =>{
+    removeAuthTokenFromLocalStorage();
+
+    navigate("/login");
+  }
   const login = async (userData) => {
     try {
       const response = await fetch("http://localhost:5000/login", {
@@ -16,24 +34,22 @@ export const AuthProvider = ({ children }) => {
         },
         body: JSON.stringify(userData),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error);
       }
-  
+      const responseData = await response.json();
+      const token = responseData.token;
+      saveAuthTokenToLocalStorage(token);
+      navigate("/");
      
-      navigate('/')
-      setIsAuthenticated(true)
-      
     } catch (error) {
       console.error("Error:", error.message);
-
     }
   };
   const register = async (userData) => {
     try {
-      
       const response = await fetch("http://localhost:5000/register", {
         method: "POST",
         headers: {
@@ -46,21 +62,20 @@ export const AuthProvider = ({ children }) => {
         const errorData = await response.json();
         throw new Error(errorData.error);
       }
-      if(response.ok){
-        console.log('asd');
-      }
-      navigate('/')
-      setIsAuthenticated(true)
+      const responseData = await response.json();
+      const token = responseData.token;
+      saveAuthTokenToLocalStorage(token);
+      navigate("/");
       
     } catch (error) {
       console.error("Error:", error.message);
-
     }
   };
   const contextValues = {
     isAuthenticated,
     login,
-    register
+    register,
+    logout
   };
 
   return (

@@ -2,6 +2,7 @@ import styles from "./home.module.css";
 import Form from "../Form/form";
 import Specialty from "./specialty";
 
+
 const Home = ({}) => {
   return (
     <div className={styles.wrapper}>

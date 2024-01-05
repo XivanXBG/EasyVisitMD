@@ -1,5 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("../utils/jwt-async");
+const { SECRET } = require("../constants");
 const { loadErrorMessages } = require("../utils/errorParser");
 
 exports.loadUsers = async () => {
@@ -14,7 +16,13 @@ exports.loadUsers = async () => {
 exports.register = async (userData) => {
   try {
     const user = await User.create(userData);
-    return user
+    const data = {
+      _id: user._id,
+      email: user.email,
+      username: user.username,
+    };
+    const token = await jwt.sign(data, SECRET, { expiresIn: "1d" });
+    return token;
   } catch (error) {
     throw loadErrorMessages(error);
   }
@@ -25,19 +33,19 @@ exports.login = async (userData) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    throw ("Username or password is invalid");
+    throw "Username or password is invalid";
   }
   const isPassValid = await bcrypt.compare(password, user.password);
 
   if (!isPassValid) {
-    throw ("Username or password is invalid");
+    throw "Username or password is invalid";
   }
 
-  // const data = {
-  //   _id: user._id,
-  //   email: user.email,
-  //   username: user.username,
-  // };
-  // const token = await jwt.sign(data, SECRET, { expiresIn: "1d" });
-  // return token;
+  const data = {
+    _id: user._id,
+    email: user.email,
+    username: user.username,
+  };
+  const token = await jwt.sign(data, SECRET, { expiresIn: "1d" });
+  return token;
 };

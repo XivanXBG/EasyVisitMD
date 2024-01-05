@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
 import styles from "./header.module.css";
 export default function Header() {
-  const { isAuthenticated } = useContext(AuthContext);
-  console.log(isAuthenticated);
+  const { isAuthenticated,logout } = useContext(AuthContext);
+ 
   return (
     <div>
       <nav>
@@ -16,8 +16,10 @@ export default function Header() {
               alt="Logo"
             />
           </Link>
-          {isAuthenticated && (
-            <Link to="/profile">
+          {isAuthenticated() && (
+          <>
+          <a onClick={()=>logout()} href="">logout</a>
+          <Link to="/profile">
               <img
                 style={{ height: "40px" }}
                 className={styles.headerLogo}
@@ -25,8 +27,10 @@ export default function Header() {
                 alt="Profile"
               />
             </Link>
+          </>
+            
           )}
-          {!isAuthenticated && (
+          {!isAuthenticated() && (
             <Link to="/login">
               <img
                 style={{ height: "40px" }}
