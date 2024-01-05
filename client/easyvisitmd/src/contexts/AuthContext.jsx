@@ -1,9 +1,6 @@
 import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-
-
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -19,12 +16,40 @@ export const AuthProvider = ({ children }) => {
   }
 
   const navigate = useNavigate();
+
+  const loadUserInfo = async () => {
+    const authToken = localStorage.getItem("authToken");
   
-  const logout = () =>{
+    if (authToken === null) {
+      return;
+    }
+  
+    const res = await fetch("http://localhost:5000/userInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Set content type to JSON
+      },
+      body: JSON.stringify({ token: authToken }), // Send data as JSON
+    });
+  
+    console.log(res);
+  
+    if (!res.ok) {
+      navigate("/login");
+    }
+  
+    const responseData = await res.json();
+    const user = responseData.user;
+    return user;
+  };
+  
+
+  loadUserInfo().then((x) => console.log(x));
+  const logout = () => {
     removeAuthTokenFromLocalStorage();
 
-    navigate("/login");
-  }
+    navigate("/");
+  };
   const login = async (userData) => {
     try {
       const response = await fetch("http://localhost:5000/login", {
@@ -43,7 +68,6 @@ export const AuthProvider = ({ children }) => {
       const token = responseData.token;
       saveAuthTokenToLocalStorage(token);
       navigate("/");
-     
     } catch (error) {
       console.error("Error:", error.message);
     }
@@ -66,7 +90,6 @@ export const AuthProvider = ({ children }) => {
       const token = responseData.token;
       saveAuthTokenToLocalStorage(token);
       navigate("/");
-      
     } catch (error) {
       console.error("Error:", error.message);
     }
@@ -75,7 +98,8 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated,
     login,
     register,
-    logout
+    logout,
+    loadUserInfo,
   };
 
   return (

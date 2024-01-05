@@ -3,8 +3,11 @@ import { useContext, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
 import styles from "./header.module.css";
 export default function Header() {
-  const { isAuthenticated,logout } = useContext(AuthContext);
- 
+  const { isAuthenticated,logout, loadUserInfo } = useContext(AuthContext);
+  
+  
+
+
   return (
     <div>
       <nav>

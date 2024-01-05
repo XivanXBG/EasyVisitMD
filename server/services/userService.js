@@ -19,10 +19,9 @@ exports.register = async (userData) => {
     const data = {
       _id: user._id,
       email: user.email,
-      username: user.username,
     };
     const token = await jwt.sign(data, SECRET, { expiresIn: "1d" });
-    return token;
+    return { user, token };
   } catch (error) {
     throw loadErrorMessages(error);
   }
@@ -44,8 +43,13 @@ exports.login = async (userData) => {
   const data = {
     _id: user._id,
     email: user.email,
-    username: user.username,
   };
   const token = await jwt.sign(data, SECRET, { expiresIn: "1d" });
-  return token;
+  return { user, token };
+};
+exports.findByToken = async (token) => {
+  
+  const decodedToken = await jwt.verify(token,SECRET);
+  let user = await User.findById(decodedToken._id);
+  return user;
 };
