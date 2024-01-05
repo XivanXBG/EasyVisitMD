@@ -1,0 +1,59 @@
+.profile-container {
+    display: grid;
+    grid-template-columns: 20% 60%;
+   gap: 50px;
+    max-width: 100%;
+    margin: 100px;
+  
+  }
+  
+  .profile-sidebar {
+  
+    background-color: #f0f0f0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profile-sidebar button {
+    margin-bottom: 10px;
+    padding: 8px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+  }
+  
+  .profile-sidebar button.active {
+    background-color: #4caf50;
+    color: #fff;
+  }
+  
+ 
+  
+  .profile-info {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .my-reservations,
+  .past-reservations {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: none;
+  }
+  
+  .my-reservations h2,
+  .past-reservations h2 {
+    margin-bottom: 10px;
+  }
+  
+  .my-reservations.active,
+  .past-reservations.active {
+    display: block;
+  }
+  
