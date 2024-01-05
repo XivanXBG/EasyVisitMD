@@ -4,20 +4,23 @@
    gap: 50px;
     max-width: 100%;
     margin: 100px;
+    
   
   }
   
   .profile-sidebar {
-  
+  height: 300px;
     background-color: #f0f0f0;
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
   
   .profile-sidebar button {
     margin-bottom: 10px;
+    font-size: 20px;
     padding: 8px;
     cursor: pointer;
     border: none;
@@ -27,15 +30,43 @@
   .profile-sidebar button.active {
     background-color: #4caf50;
     color: #fff;
+    width: 200px;
   }
   
  
   
   .profile-info {
-    background-color: #fff;
+    position: relative; /* Add position relative to the parent */
+    background-color: #f0f0f0;
+
     padding: 20px;
+    display: flex;
+    flex-direction: column;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-info i {
+    position: absolute; /* Position the icon absolutely */
+    top: 10px; /* Adjust the top value as needed */
+    right: 10px; /* Adjust the right value as needed */
+    font-size: 35px; /* Adjust the font size as needed */
+    color: #333; /* Adjust the color as needed */
+  }
+  .profile-info i:hover {
+   cursor: pointer;
+   transform: scale(1.1);
+  }
+  
+  .profile-info div{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px;
+  }
+  div strong{
+    font-size: 22px;
   }
   
   .my-reservations,

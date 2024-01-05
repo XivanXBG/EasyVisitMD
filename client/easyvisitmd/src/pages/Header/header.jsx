@@ -1,12 +1,28 @@
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
 import AuthContext from "../../contexts/AuthContext";
 import styles from "./header.module.css";
-export default function Header() {
-  const { isAuthenticated,logout, loadUserInfo } = useContext(AuthContext);
-  
-  
 
+const Header = () => {
+  const { isAuthenticated, logout, loadUserInfo } = useContext(AuthContext);
+
+  const [userInfo, setUserInfo] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      loadUserInfo().then((x) => setUserInfo(x));
+    }
+  }, [isAuthenticated, loadUserInfo]);
+
+  const handleLogout = () => {
+    logout();
+    setShowDropdown(false);
+  };
+
+  const toggleDropdown = () => {
+    setShowDropdown((prev) => !prev);
+  };
 
   return (
     <div>
@@ -20,18 +36,22 @@ export default function Header() {
             />
           </Link>
           {isAuthenticated() && (
-          <>
-          <a onClick={()=>logout()} href="">logout</a>
-          <Link to="/profile">
-              <img
-                style={{ height: "40px" }}
-                className={styles.headerLogo}
-                src="/images/profile.png"
-                alt="Profile"
-              />
-            </Link>
-          </>
-            
+            <div className={styles.dropdownContainer}>
+              <button
+                className={styles.dropdownToggle}
+                onClick={toggleDropdown}
+              >
+                Hello, {userInfo && userInfo.name} ▼
+              </button>
+              {showDropdown && (
+                <div className={styles.dropdownContent}>
+                  <Link to="/profile">Profile</Link>
+                  <Link to="/my-reservations">My Reservations</Link>
+                  <Link to="/past-reservations">Past Reservations</Link>
+                  <button className={styles.logout} onClick={handleLogout}>Logout</button>
+                </div>
+              )}
+            </div>
           )}
           {!isAuthenticated() && (
             <Link to="/login">
@@ -48,4 +68,6 @@ export default function Header() {
       <hr style={{ margin: "0px", padding: "0px" }} />
     </div>
   );
-}
+};
+
+export default Header;

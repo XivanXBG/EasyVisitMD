@@ -11,3 +11,58 @@
     object-fit: cover;
     height: 60px;
 }
+/* Existing styles... */
+
+.dropdownContainer {
+    position: relative;
+  }
+  
+  .dropdownToggle {
+    background-color: transparent;
+    color: #000;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+    border:2px solid transparent;
+  }
+  .dropdownToggle:hover{
+    border:2px solid #d5c7c7;
+    
+    border-radius: 8px;
+  }
+  .logout{
+    background-color: rgb(189, 34, 34);
+    color: white !important;
+  }
+  .logout:hover{
+    cursor: pointer;
+    background-color: rgb(171, 32, 32) !important;
+    color: white !important;
+  }
+  .dropdownContent {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; /* Position the dropdown below the toggle button */
+    right: 0;
+    
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
+  
+  .dropdownContent a,
+  .dropdownContent button {
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdownContent a:hover,
+  .dropdownContent button:hover {
+    background-color: #f1f1f1;
+  }
+  
