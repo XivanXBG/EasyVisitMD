@@ -32,11 +32,10 @@ export const AuthProvider = ({ children }) => {
       body: JSON.stringify({ token: authToken }), // Send data as JSON
     });
   
-    console.log(res);
-  console.log('asd');
+   
     if (!res.ok) {
       navigate("/login");
-      return
+      return null;
     }
   
     const responseData = await res.json();
