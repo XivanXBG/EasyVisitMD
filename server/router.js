@@ -22,17 +22,22 @@ router.post("/login", async (req, res) => {
   }
 });
 router.post("/userInfo", async (req, res) => {
- 
   const token = req.body.token;
   if (!token) {
     res.sendStatus(403);
-    return;
+    return null;
   }
 
-  let {name,family,role,_id,email} = await userService.findByToken(token);
-  let parsedData = {name,family,role,_id,email}
-  res.status(200).json({ user: parsedData });
+  let response = await userService.findByToken(token);
+  console.log(response);
+  if (response === null) {
+    res.status(404);
+  } else {
+    let { name, family, role, _id, email } = response;
+    let parsedData = { name, family, role, _id, email };
+    console.log(parsedData);
+    res.status(200).json({ user: parsedData });
+  }
 });
-
 
 module.exports = router;

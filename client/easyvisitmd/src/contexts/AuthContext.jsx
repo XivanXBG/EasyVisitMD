@@ -33,9 +33,10 @@ export const AuthProvider = ({ children }) => {
     });
   
     console.log(res);
-  
+  console.log('asd');
     if (!res.ok) {
       navigate("/login");
+      return
     }
   
     const responseData = await res.json();
