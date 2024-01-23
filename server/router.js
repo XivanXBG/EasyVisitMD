@@ -63,9 +63,9 @@ router.post("/updateUser", async (req, res) => {
 
 router.post("/deleteUser", async (req, res) => {
   const body = req.body;
-  console.log(body);
+ 
   try {
-    await userService.deleteUser(body);
+    await userService.deleteUser(body.userId);
   } catch (error) {
     throw error;
   }

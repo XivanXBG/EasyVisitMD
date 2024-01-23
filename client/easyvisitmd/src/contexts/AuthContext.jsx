@@ -52,6 +52,18 @@ export const AuthProvider = ({ children }) => {
     console.log(res);
     return;
   }
+  const deleteUser = async (userData) =>{
+   
+    const res = await fetch("http://localhost:5000/deleteUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Set content type to JSON
+      },
+      body: JSON.stringify({userId:userData}), // Send data as JSON
+    });
+    console.log(res);
+    return;
+  }
 
   
   const logout = () => {
@@ -109,7 +121,8 @@ export const AuthProvider = ({ children }) => {
     register,
     logout,
     loadUserInfo,
-    updateUser
+    updateUser,
+    deleteUser
   };
 
   return (
