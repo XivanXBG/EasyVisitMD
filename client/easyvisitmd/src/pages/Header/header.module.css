@@ -31,6 +31,15 @@
     
     border-radius: 8px;
   }
+  .link{
+    text-decoration: none;
+    color: #000;
+    font-size: 20px;
+  }
+  .link:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+  }
   .logout{
     background-color: rgb(189, 34, 34);
     color: white !important;

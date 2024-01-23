@@ -13,9 +13,9 @@ const Header = () => {
   useEffect(() => {
     loadUserInfo().then((x) => {
       setUserInfo(x);
-      if(x==null){
+      if (x == null) {
         setIsAuthenticated(false);
-      }else{
+      } else {
         setIsAuthenticated(true);
       }
     });
@@ -41,6 +41,12 @@ const Header = () => {
               alt="Logo"
             />
           </Link>
+          <div style={{display:'flex',gap:'20px'}}>
+          {userInfo?.role == "ceo" && <Link className={styles.link} to='/users'>Users</Link>}
+          {userInfo?.role == "ceo" && <Link className={styles.link} to='/add-doctor'>Doctor</Link>}
+          </div>
+          
+
           {isAuthenticated && (
             <div className={styles.dropdownContainer}>
               <button

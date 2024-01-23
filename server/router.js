@@ -40,13 +40,18 @@ router.post("/userInfo", async (req, res) => {
   }
 });
 
+router.get('/loadUsers',async(req,res)=>{
+  console.log('asd');
+  let data = await userService.loadUsers();
+ 
+  res.status(200).json(data);
+})
 router.post("/updateUser", async (req, res) => {
   const body = req.body;
-  console.log(body);
+  
   const userData = body.userInfo;
   const userId = body.userId;
-  console.log(userData);
-  console.log(userId);
+  
 
   try {
     await userService.updateUser(userId, userData);

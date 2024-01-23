@@ -57,7 +57,10 @@
    cursor: pointer;
    transform: scale(1.1);
   }
-  
+  .buttonEdit:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+  }
   .profile-info div{
     display:flex;
     flex-direction: column;

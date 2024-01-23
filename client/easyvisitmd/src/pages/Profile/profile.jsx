@@ -1,35 +1,33 @@
 import { useState, useEffect, useContext } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext";
 import useForm from "../../hooks/useForm";
 import "./profile.css";
 export default function Profile() {
-  const { loadUserInfo,updateUser } = useContext(AuthContext);
+  const { loadUserInfo, updateUser } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState();
   const [activeTab, setActiveTab] = useState("profileInfo");
   const navigate = useNavigate();
   const submitHandler = () => {
-    
     let name = values.name;
     let family = values.family;
-    if(name === ""){
+    if (name === "") {
       name = userInfo.name;
     }
-    if(family === ""){
+    if (family === "") {
       family = userInfo.family;
     }
     const temp = {
-     ...userInfo,
-     name,
-     family
-     
-    }
+      ...userInfo,
+      name,
+      family,
+    };
     userInfo.name = name;
     userInfo.family = family;
 
     updateUser(temp);
-    navigate('/profile')
-    setActiveTab('profileInfo')
+    navigate("/profile");
+    setActiveTab("profileInfo");
   };
   const { onSubmit, onChange, values } = useForm(submitHandler, {
     name: userInfo?.name || "",
@@ -42,18 +40,14 @@ export default function Profile() {
     });
   }, []);
 
-  
   useEffect(() => {
     renderContent();
   }, [activeTab]); // Add activeTab as a dependency
-  
 
   const switchTab = (tab) => {
     setActiveTab(tab);
     renderContent();
   };
-
-  
 
   const renderProfileInfo = () => (
     <div>
@@ -97,23 +91,42 @@ export default function Profile() {
   const renderEditProfile = () =>
     userInfo && (
       <div className="profile-info">
-        <i
-          onClick={(e) => onSubmit(e)}
-          className="fa-solid fa-pen-to-square"
-        ></i>
+        <i onClick={(e) => onSubmit(e)} className="fa-solid fa-floppy-disk"></i>
         <h2>Редактирай:</h2>
-        <form onSubmit={onSubmit} action="">
+        <form
+          style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+          onSubmit={onSubmit}
+          action=""
+        >
           <label htmlFor="name">Име:</label>
-          <input name="name" onChange={onChange} value={values['name']} type="text" />
+          <input
+            style={{ padding: "5px" }}
+            name="name"
+            onChange={onChange}
+            value={values["name"]}
+            type="text"
+          />
           <label htmlFor="family">Фамилия:</label>
           <input
-          name="family"
+            style={{ padding: "5px" }}
+            name="family"
             onChange={onChange}
-            value={values['family']}
+            value={values["family"]}
             placeholder={values.family}
             type="text"
           />
-          <button>Запиши</button>
+          <button
+            className="buttonEdit"
+            style={{
+              backgroundColor: "green",
+              width: "150px",
+              padding: "8px",
+              color: "white",
+              borderRadius:'10px'
+            }}
+          >
+            Запиши
+          </button>
         </form>
       </div>
     );
@@ -142,7 +155,6 @@ export default function Profile() {
         >
           Profile Info
         </button>
-
 
         <button
           className={activeTab === "myReservations" ? "active" : ""}

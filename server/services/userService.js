@@ -7,6 +7,7 @@ const { loadErrorMessages } = require("../utils/errorParser");
 exports.loadUsers = async () => {
   try {
     const users = User.find();
+   
     return users;
   } catch (error) {
     throw new Error("Error loading users!");

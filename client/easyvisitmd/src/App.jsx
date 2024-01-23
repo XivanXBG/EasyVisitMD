@@ -7,6 +7,7 @@ import store from "../src/reducer/store";
 import { Provider } from "react-redux";
 import { AuthProvider } from "./contexts/AuthContext";
 import Profile from './pages/Profile/profile'
+import UsersTable from "./pages/Users/users";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/users" element={<UsersTable />}></Route>
           </Routes>
         </Provider>
       </AuthProvider>
