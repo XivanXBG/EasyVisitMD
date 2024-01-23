@@ -1,17 +1,40 @@
 import { useState, useEffect, useContext } from "react";
+import {useNavigate} from 'react-router-dom'
 import AuthContext from "../../contexts/AuthContext";
 import useForm from "../../hooks/useForm";
 import "./profile.css";
 export default function Profile() {
-  const { loadUserInfo } = useContext(AuthContext);
+  const { loadUserInfo,updateUser } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState();
   const [activeTab, setActiveTab] = useState("profileInfo");
-  const submitHandler = ()=>{
-    console.log(values);
-  }
-  const {onSubmit,onChange,values} = useForm(submitHandler,{name: userInfo?.name,family: userInfo?.family});
+  const navigate = useNavigate();
+  const submitHandler = () => {
+    
+    let name = values.name;
+    let family = values.family;
+    if(name === ""){
+      name = userInfo.name;
+    }
+    if(family === ""){
+      family = userInfo.family;
+    }
+    const temp = {
+     ...userInfo,
+     name,
+     family
+     
+    }
+    userInfo.name = name;
+    userInfo.family = family;
 
-  
+    updateUser(temp);
+    navigate('/profile')
+    setActiveTab('profileInfo')
+  };
+  const { onSubmit, onChange, values } = useForm(submitHandler, {
+    name: userInfo?.name || "",
+    family: userInfo?.family || "",
+  });
 
   useEffect(() => {
     loadUserInfo().then((res) => {
@@ -19,17 +42,18 @@ export default function Profile() {
     });
   }, []);
 
+  
   useEffect(() => {
-    if (userInfo) {
-      values.name = userInfo.name;
-      values.family = userInfo.family;
-        
-    }
-  }, [userInfo]);
+    renderContent();
+  }, [activeTab]); // Add activeTab as a dependency
+  
 
   const switchTab = (tab) => {
     setActiveTab(tab);
+    renderContent();
   };
+
+  
 
   const renderProfileInfo = () => (
     <div>
@@ -56,38 +80,43 @@ export default function Profile() {
   );
 
   const renderMyReservations = () => (
-    <div className="my-reservations">
-      <h2>My Reservations</h2>
-      {/* Add your reservations logic here */}
+    <div>
+      <div className="profile-info">
+        <h2>My Reservations</h2>
+        {/* Add your reservations logic here */}
+      </div>
     </div>
   );
 
   const renderPastReservations = () => (
-    <div className="past-reservations">
+    <div className="profile-info">
       <h2>Past Reservations</h2>
-      {/* Add your past reservations logic here */}
+      <h1>ads</h1>
     </div>
   );
-  const renderEditProfile = () => (
+  const renderEditProfile = () =>
     userInfo && (
       <div className="profile-info">
-      <i
-        onClick={() => switchTab("editProfile")}
-        className="fa-solid fa-pen-to-square"
-      ></i>
-      <h2>Редактирай:</h2>
-      <form onSubmit={onSubmit} action="">
-        <label>Име:</label>
-        <input onChange={onChange} value={values['name']} type="text" />
-        <label>Фамилия:</label>
-        <input onChange={onChange} value={values['family']} placeholder={values.family} type="text" />
-        <button>Запиши</button>
-        
-      </form>
-    </div>
-    )
-    
-  );
+        <i
+          onClick={(e) => onSubmit(e)}
+          className="fa-solid fa-pen-to-square"
+        ></i>
+        <h2>Редактирай:</h2>
+        <form onSubmit={onSubmit} action="">
+          <label htmlFor="name">Име:</label>
+          <input name="name" onChange={onChange} value={values['name']} type="text" />
+          <label htmlFor="family">Фамилия:</label>
+          <input
+          name="family"
+            onChange={onChange}
+            value={values['family']}
+            placeholder={values.family}
+            type="text"
+          />
+          <button>Запиши</button>
+        </form>
+      </div>
+    );
 
   const renderContent = () => {
     switch (activeTab) {
@@ -113,6 +142,8 @@ export default function Profile() {
         >
           Profile Info
         </button>
+
+
         <button
           className={activeTab === "myReservations" ? "active" : ""}
           onClick={() => switchTab("myReservations")}

@@ -50,11 +50,20 @@ exports.login = async (userData) => {
 exports.findByToken = async (token) => {
   try {
     const decodedToken = await jwt.verify(token, SECRET);
-    
+
     let user = await User.findById(decodedToken._id);
-    
+
     return user;
   } catch (error) {
     return null;
   }
+};
+exports.updateUser = async (userId, userData) => {
+  console.log(userId);
+  console.log(userData);
+  await User.findByIdAndUpdate(userId, userData);
+};
+
+exports.deleteUser = async (userId) => {
+  await User.findByIdAndDelete(userId);
 };

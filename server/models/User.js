@@ -48,11 +48,19 @@ userSchema.pre("save", async function () {
     }
 
     let pass = this.password.trim();
+    let email = this.email.trim();
+    let name = this.name.trim()
+    let family = this.family.trim();
+
+    this.email = email;
+    this.name = name;
+    this.family = family;
     this.password = pass;
 
     const hash = await bcrypt.hash(this.password, 10);
     this.password = hash;
 });
+
 
 const User = mongoose.model("User", userSchema);
 

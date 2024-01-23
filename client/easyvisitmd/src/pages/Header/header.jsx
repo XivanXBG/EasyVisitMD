@@ -4,16 +4,22 @@ import AuthContext from "../../contexts/AuthContext";
 import styles from "./header.module.css";
 
 const Header = () => {
-  const { isAuthenticated, logout, loadUserInfo } = useContext(AuthContext);
+  const { logout, loadUserInfo } = useContext(AuthContext);
 
   const [userInfo, setUserInfo] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    if (isAuthenticated()) {
-      loadUserInfo().then((x) => setUserInfo(x));
-    }
-  }, [isAuthenticated, loadUserInfo]);
+    loadUserInfo().then((x) => {
+      setUserInfo(x);
+      if(x==null){
+        setIsAuthenticated(false);
+      }else{
+        setIsAuthenticated(true);
+      }
+    });
+  }, [loadUserInfo]);
 
   const handleLogout = () => {
     logout();
@@ -35,7 +41,7 @@ const Header = () => {
               alt="Logo"
             />
           </Link>
-          {isAuthenticated() && (
+          {isAuthenticated && (
             <div className={styles.dropdownContainer}>
               <button
                 className={styles.dropdownToggle}
@@ -48,12 +54,14 @@ const Header = () => {
                   <Link to="/profile">Profile</Link>
                   <Link to="/my-reservations">My Reservations</Link>
                   <Link to="/past-reservations">Past Reservations</Link>
-                  <button className={styles.logout} onClick={handleLogout}>Logout</button>
+                  <button className={styles.logout} onClick={handleLogout}>
+                    Logout
+                  </button>
                 </div>
               )}
             </div>
           )}
-          {!isAuthenticated() && (
+          {!isAuthenticated && (
             <Link to="/login">
               <img
                 style={{ height: "40px" }}

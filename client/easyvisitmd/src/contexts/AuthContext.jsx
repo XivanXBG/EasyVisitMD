@@ -10,10 +10,7 @@ export const AuthProvider = ({ children }) => {
   function removeAuthTokenFromLocalStorage() {
     localStorage.removeItem("authToken");
   }
-  function isAuthenticated() {
-    const authToken = localStorage.getItem("authToken");
-    return authToken !== null;
-  }
+  
 
   const navigate = useNavigate();
 
@@ -43,8 +40,20 @@ export const AuthProvider = ({ children }) => {
     return user;
   };
   
+  const updateUser = async (userData) =>{
+   
+    const res = await fetch("http://localhost:5000/updateUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json", // Set content type to JSON
+      },
+      body: JSON.stringify({ userId: userData._id,userInfo:userData }), // Send data as JSON
+    });
+    console.log(res);
+    return;
+  }
 
-  loadUserInfo().then((x) => console.log(x));
+  
   const logout = () => {
     removeAuthTokenFromLocalStorage();
 
@@ -95,11 +104,12 @@ export const AuthProvider = ({ children }) => {
     }
   };
   const contextValues = {
-    isAuthenticated,
+   
     login,
     register,
     logout,
     loadUserInfo,
+    updateUser
   };
 
   return (

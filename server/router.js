@@ -29,7 +29,7 @@ router.post("/userInfo", async (req, res) => {
   }
 
   let response = await userService.findByToken(token);
-  console.log(response);
+
   if (response === null) {
     res.status(404);
   } else {
@@ -40,4 +40,30 @@ router.post("/userInfo", async (req, res) => {
   }
 });
 
+router.post("/updateUser", async (req, res) => {
+  const body = req.body;
+  console.log(body);
+  const userData = body.userInfo;
+  const userId = body.userId;
+  console.log(userData);
+  console.log(userId);
+
+  try {
+    await userService.updateUser(userId, userData);
+  } catch (error) {
+    throw error;
+  }
+  res.status(200).end();
+});
+
+router.post("/deleteUser", async (req, res) => {
+  const body = req.body;
+  console.log(body);
+  try {
+    await userService.deleteUser(body);
+  } catch (error) {
+    throw error;
+  }
+  res.status(200).end();
+});
 module.exports = router;
