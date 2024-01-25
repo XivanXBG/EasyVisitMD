@@ -73,6 +73,13 @@ router.post("/updateUser", async (req, res) => {
   res.status(200).end();
 });
 
+router.get('/doctors',async(req,res)=>{
+  console.log('asd');
+  let doctors=await doctorService.findAll();
+  console.log(doctors);
+
+  res.status(200).json(doctors);
+})
 router.post("/deleteUser", async (req, res) => {
   const body = req.body;
  

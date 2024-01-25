@@ -1,23 +1,31 @@
-import useForm from "../../hooks/useForm";
-import styles from "./form.module.css";
+import React from 'react';
+import { connect } from 'react-redux';
+import { updateSearchCriteria } from '../../reducer/action'; // Update the path
+import { useNavigate } from 'react-router-dom';
+import useForm from '../../hooks/useForm';
+import styles from './form.module.css';
 
 const defaultValues = {
-  Specialty: "specialty",
-  Location: "location",
-  NameDoc: "namedoc",
+  Specialty: 'specialty',
+  Location: 'location',
+  name: 'name',
 };
 
-export default function Form() {
-  const submitHandler = () => {
-    console.log(values);
-  };
+const Form = ({ searchCriteria, updateSearchCriteria }) => {
+  const navigate = useNavigate();
 
   
-  const { onChange, onSubmit, values } = useForm(submitHandler, {
-    [defaultValues.Location]: "",
-    [defaultValues.NameDoc]: "",
-    [defaultValues.Specialty]: "",
+  const submitHandler = () => {
+    updateSearchCriteria(values);
+    navigate('/doctors');
+  };
+  const { values, onChange, onSubmit } = useForm(submitHandler, {
+    [defaultValues.Location]: searchCriteria.location || '',
+    [defaultValues.name]: searchCriteria.name || '',
+    [defaultValues.Specialty]: searchCriteria.specialty || '',
   });
+  
+  
 
   return (
     <div className={styles.container}>
@@ -29,7 +37,7 @@ export default function Form() {
           value={values[defaultValues.Specialty]}
           onChange={onChange}
         >
-          <option value="">Избери специалност</option>
+           <option value="">Избери специалност</option>
           <option value="Кардиолог">Кардиолог</option>
           <option value="Дерматолог">Дерматолог</option>
           <option value="Ортопед">Ортопед</option>
@@ -65,15 +73,27 @@ export default function Form() {
           <option value="Pulmed">Поликлиника "Пулмед"</option>
         </select>
         <input
-          name={defaultValues.NameDoc}
-          value={values[defaultValues.NameDoc]}
+          name={defaultValues.name}
+          value={values[defaultValues.name]}
           onChange={onChange}
           type="text"
           placeholder="Търси име по лекар...  (кирилица)"
         />
 
-        <button className={styles.submitButton}>Submit</button>
+        <button className={styles.submitButton} type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state) => ({
+  searchCriteria: state, // Access the entire search criteria from Redux
+});
+
+const mapDispatchToProps = {
+  updateSearchCriteria,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

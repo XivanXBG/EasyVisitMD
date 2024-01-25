@@ -10,4 +10,22 @@ const createDoctor = async(doctorData)=>{
     return;
 }
 
-export {createDoctor};
+
+const searchDoctor = async (searchCriteria) => {
+  
+  const res = await fetch('http://localhost:5000/doctors');
+  const doctors = await res.json();
+console.log(searchCriteria);
+
+const filteredDoctors = doctors.filter((doctor) => {
+  return (
+    (!searchCriteria.specialty || doctor.specialty === searchCriteria.specialty) &&
+    (!searchCriteria.location || doctor.location === searchCriteria.location) &&
+    (!searchCriteria.name || doctor.firstName.toLowerCase().includes(searchCriteria.name.toLowerCase()) || doctor.family.toLowerCase().includes(searchCriteria.name.toLowerCase()))
+  );
+});
+console.log(filteredDoctors);
+  return filteredDoctors;
+};
+
+export {createDoctor,searchDoctor};

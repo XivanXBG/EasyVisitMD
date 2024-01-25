@@ -2,7 +2,7 @@ const initialState = {
    
     specialty:"",
   location:"",
-  namedoc:"",
+  name:"",
   };
   
   const searchCriteriaReducer = (state = initialState, action) => {
