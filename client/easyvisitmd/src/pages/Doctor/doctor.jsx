@@ -1,5 +1,7 @@
 import styles from "./doctor.module.css";
 import useForm from "../../hooks/useForm";
+import { createDoctor } from "../../services/doctorService";
+import {useNavigate} from 'react-router-dom'
 
 const defaultValues = {
     firstName: "",
@@ -9,10 +11,12 @@ const defaultValues = {
   };
 
 export default function Doctor() {
+  const navigate = useNavigate();
   const submitValues = () => {
-    console.log("submit");
-    console.log(values);
+    createDoctor(values);
+    navigate('/')
   };
+
   const { onChange, onSubmit, values } = useForm(submitValues, defaultValues);
 
   return (

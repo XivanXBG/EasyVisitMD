@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userService = require("./services/userService");
+const doctorService = require('./services/doctorService')
 
 router.post("/register", async (req, res) => {
   try {
@@ -40,8 +41,19 @@ router.post("/userInfo", async (req, res) => {
   }
 });
 
+router.post('/add-doctor',async(req,res)=>{
+  const doctorData = req.body;
+  const data = doctorData.data;
+
+  try {
+    await doctorService.createDoctor(data);
+    res.status(200).end();
+  } catch (error) {
+    throw error
+  }
+})
 router.get('/loadUsers',async(req,res)=>{
-  console.log('asd');
+  
   let data = await userService.loadUsers();
  
   res.status(200).json(data);

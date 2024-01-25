@@ -60,8 +60,7 @@ exports.findByToken = async (token) => {
   }
 };
 exports.updateUser = async (userId, userData) => {
-  console.log(userId);
-  console.log(userData);
+  
   await User.findByIdAndUpdate(userId, userData);
 };
 
