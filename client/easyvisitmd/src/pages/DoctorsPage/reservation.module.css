@@ -14,8 +14,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 400px;
-  height: 500px;
+  width: 600px;
+  padding: 20px;
+  height: auto;
   margin: 100px auto;
 }
 
@@ -47,11 +48,20 @@
 }
 
 .modal input {
-  width: 100%;
+  
   padding: 8px;
   margin-bottom: 20px;
 }
-
+.timeButtons{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 100%;
+}
+.occupied{
+background-color: red !important;
+}
 .modal button {
   background-color: #4caf50;
   color: #fff;
@@ -63,4 +73,19 @@
 
 .modal button:hover {
   background-color: #45a049;
+  cursor: pointer;
+}
+.selectModal{
+  margin: 10px;
+  margin-left: 0px;
+  padding: 5px;
+  font-size: 15px;
+}
+.selectModal option {
+  padding: 8px;
+}
+.selectedTime {
+  background-color: yellow !important; /* or any other style you want for selected time */
+  color: black !important;
+  /* Add any other styles for the selected time button */
 }

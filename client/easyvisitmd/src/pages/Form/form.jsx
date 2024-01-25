@@ -81,7 +81,7 @@ const Form = ({ searchCriteria, updateSearchCriteria }) => {
         />
 
         <button className={styles.submitButton} type="submit">
-          Submit
+          Търси
         </button>
       </form>
     </div>
