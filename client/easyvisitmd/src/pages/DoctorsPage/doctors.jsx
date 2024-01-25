@@ -8,6 +8,7 @@ import ReservationModal from './reservationModal';
 import Form from '../Form/form';
 import styles from './doctors.module.css';
 
+
 const DoctorList = ({ searchCriteria }) => {
   const [doctors, setDoctors] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,7 +27,8 @@ const DoctorList = ({ searchCriteria }) => {
     setSelectedDoctor(doctor);
     setIsModalOpen(true);
     document.body.style.overflow = 'hidden'; // Disable scrolling when the modal is open
-    document.body.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'; // Darken the background
+    document.body.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+   
   };
   
   const closeModal = () => {
@@ -37,9 +39,12 @@ const DoctorList = ({ searchCriteria }) => {
   return (
     <div className={`${styles.container} ${isModalOpen ? styles.modalOpen : ''}`}>
       
-      <div className={styles.searchForm}>
+      {!isModalOpen && (
+        <div className={styles.searchForm}>
         <Form />
       </div>
+      )}
+      
       <div className={styles.results}>
         <h2>Doctor List</h2>
         {doctors.map((doctor) => (
