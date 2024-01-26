@@ -10,9 +10,14 @@ const defaultValues = {
 
 export default function Login() {
   const {login} = useContext(AuthContext);
-  const loginHandler = async() => {
-
-    await login(values);
+  const loginHandler = async () => {
+    try {
+      await login(values);
+      // If login is successful, continue with any other logic
+    } catch (error) {
+      console.log(error.message); // Log the error message
+      // Handle the error here, show a message to the user, etc.
+    }
   };
   const { onChange, onSubmit, values } = useForm(loginHandler, {
     [defaultValues.Email]: "",

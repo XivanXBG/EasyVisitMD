@@ -90,7 +90,7 @@ export const AuthProvider = ({ children }) => {
       saveAuthTokenToLocalStorage(token);
       navigate("/");
     } catch (error) {
-      console.error("Error:", error.message);
+      throw error
     }
   };
   const register = async (userData) => {
