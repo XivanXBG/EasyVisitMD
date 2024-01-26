@@ -87,6 +87,12 @@ const ReservationModal = ({ isOpen, onClose, doctorInfo }) => {
       console.error("Error creating reservation:", error);
       // Handle other errors
     }
+    let res = {
+      date:'',
+      time:'',
+      type:'free'
+    }
+    setReservationData(res)
   };
 
   const handleTimeSelection = (formattedTime) => {
@@ -174,6 +180,7 @@ const ReservationModal = ({ isOpen, onClose, doctorInfo }) => {
             display: "flex",
             justifyContent: "space-between",
             margin: "0px 20px",
+            marginLeft:'0px'
           }}
         >
           <div>

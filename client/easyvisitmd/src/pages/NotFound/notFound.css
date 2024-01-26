@@ -1,0 +1,22 @@
+/* NotFoundPage.css */
+
+.not-found-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .illustration-container {
+    margin-right: 40px; /* Регулирайте отстоянието между илюстрацията и текста */
+  }
+  
+  .text-container {
+    max-width: 400px;
+    text-align: center;
+  }
+  .text-container p {
+    font-size: 20px;
+  }
+  /* Добавете повече стилове за персонализация на външния вид, като например стилове на шрифт, цветове и др. */
+  

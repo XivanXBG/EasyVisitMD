@@ -2,6 +2,7 @@ import useForm from "../../hooks/useForm";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
+import { toast } from 'react-toastify';
 import "./register.css";
 const defaultValues = {
   Email: "email",
@@ -13,7 +14,13 @@ const defaultValues = {
 export default function Register() {
   const {register} = useContext(AuthContext);
   const registerHandler = async() => {
-    await register(values);
+    try {
+      await register(values);
+      
+    } catch (error) {
+      toast.error(error.message);
+      
+    }
   };
   const { onChange, onSubmit, values } = useForm(registerHandler, {
     [defaultValues.Email]: "",

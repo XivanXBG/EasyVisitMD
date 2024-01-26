@@ -2,14 +2,15 @@ import React from "react";
 import "./appoitment.css"; // Make sure to import your stylesheet
 import {useNavigate} from 'react-router-dom'
 const deleteHanlder = async(id) => {
-    await fetch("http://localhost:5000/deleteReservation", {
+  console.log(id);
+    const res = await fetch("http://localhost:5000/deleteReservation", {
     method: "POST",
     headers: {
       "Content-Type": "application/json", // Set content type to JSON
     },
     body: JSON.stringify({ userId: id }), // Send data as JSON
   });
-  
+  console.log(res);
 };
 function normalizeDate(dateString) {
     const dateObject = new Date(dateString);

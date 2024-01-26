@@ -1,18 +1,21 @@
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import { connect } from 'react-redux';
 import { searchDoctor } from '../../services/doctorService';
 import { updateSearchCriteria } from '../../reducer/action';
 import ReservationModal from './reservationModal';
 import Form from '../Form/form';
 import styles from './doctors.module.css';
+import AuthContext from '../../contexts/AuthContext';
 
 
 const DoctorList = ({ searchCriteria }) => {
+  const {isAuthenticated} = useContext(AuthContext)
   const [doctors, setDoctors] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [isAuth,setIsAuth] = useState();
 
   useEffect(() => {
     const fetchDoctors = async () => {
@@ -23,6 +26,9 @@ const DoctorList = ({ searchCriteria }) => {
     fetchDoctors();
   }, [searchCriteria]);
 
+  useEffect(()=>{
+    isAuthenticated().then(x=>setIsAuth(x))
+  },[])
   const openModal = (doctor) => {
     setSelectedDoctor(doctor);
     setIsModalOpen(true);
@@ -52,7 +58,10 @@ const DoctorList = ({ searchCriteria }) => {
             <h3>{`${doctor.firstName} ${doctor.family}`}</h3>
             <p>Специалност: {doctor.specialty}</p>
             <p>Локация: {getLocationName(doctor.location)}</p>
-            <button onClick={() => openModal(doctor)}>Запази час</button>
+            {isAuth&&(
+              <button onClick={() => openModal(doctor)}>Запази час</button>
+            )}
+            
           </div>
         ))}
       </div>

@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     const authToken = localStorage.getItem("authToken");
   
     if (authToken === null) {
-      return;
+      return null;
     }
   
     const res = await fetch("http://localhost:5000/userInfo", {
@@ -112,9 +112,19 @@ export const AuthProvider = ({ children }) => {
       saveAuthTokenToLocalStorage(token);
       navigate("/");
     } catch (error) {
-      console.error("Error:", error.message);
+      throw error
     }
   };
+
+  const isAuthenticated = async()=>{
+    const res = await loadUserInfo();
+
+    if(res===null){
+      return false;
+    }else{
+      return true
+    }
+  }
   const contextValues = {
    
     login,
@@ -122,7 +132,8 @@ export const AuthProvider = ({ children }) => {
     logout,
     loadUserInfo,
     updateUser,
-    deleteUser
+    deleteUser,
+    isAuthenticated
   };
 
   return (

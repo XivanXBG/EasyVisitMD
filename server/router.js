@@ -152,9 +152,9 @@ router.post("/loadReservations", async (req, res) => {
 });
 router.post("/deleteReservation", async (req, res) => {
   try {
-    const { userId } = req.query;
-    
-    await Reservation.findOneAndDelete({ userId });
+    const { userId } = req.body;
+    console.log(userId);
+    await Reservation.findByIdAndDelete(userId);
 
 
     res.send(200).end();

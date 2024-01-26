@@ -2,7 +2,9 @@ import useForm from "../../hooks/useForm";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
+import { toast } from 'react-toastify';
 import "./login.css";
+
 const defaultValues = {
   Email: "email",
   Password: "password",
@@ -15,7 +17,8 @@ export default function Login() {
       await login(values);
       // If login is successful, continue with any other logic
     } catch (error) {
-      console.log(error.message); // Log the error message
+      toast.error(error.message);
+      // Log the error message
       // Handle the error here, show a message to the user, etc.
     }
   };
