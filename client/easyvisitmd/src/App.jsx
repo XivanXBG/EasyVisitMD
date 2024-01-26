@@ -21,12 +21,12 @@ function App() {
         <Provider store={store}>
           <Header />
           <Routes>
-            
-              <Route path="/profile" element={<Profile />}></Route>
+            <Route element={<AuthGuard />}>
               <Route path="/users" element={<UsersTable />}></Route>
               <Route path="/add-doctor" element={<Doctor />}></Route>
-           
+            </Route>
 
+              <Route path="/profile" element={<Profile />}></Route>
             <Route element={<AuthGuardPublic />}>
               <Route path="/login" element={<Login />}></Route>
               <Route path="/register" element={<Register />}></Route>
@@ -34,8 +34,8 @@ function App() {
             <Route path="/" element={<Home />}></Route>
 
             <Route path="/doctors" element={<DoctorList />}></Route>
-            <Route path="/404" element={<NotFoundPage/>}></Route>
-                <Route path="*" element={<NotFoundPage />}></Route>
+            <Route path="/404" element={<NotFoundPage />}></Route>
+            <Route path="*" element={<NotFoundPage />}></Route>
           </Routes>
         </Provider>
       </AuthProvider>

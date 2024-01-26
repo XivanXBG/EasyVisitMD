@@ -118,7 +118,7 @@ export const AuthProvider = ({ children }) => {
 
   const isAuthenticated = async()=>{
     const res = await loadUserInfo();
-
+    console.log(res);
     if(res===null){
       return false;
     }else{

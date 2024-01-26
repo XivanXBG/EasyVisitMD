@@ -7,7 +7,7 @@ export default function AuthGuard(props) {
   const { isAuthenticated } = useContext(AuthContext);
   const [isAuth, setIsAuthd] = useState();
   useEffect(() => {
-    isAuthenticated().then(x=>setIsAuthd(x))
+    isAuthenticated().then(x=>{setIsAuthd(x);console.log(x);})
   }, []);
   if (!isAuth) {
     return <Navigate to="/login" />;
