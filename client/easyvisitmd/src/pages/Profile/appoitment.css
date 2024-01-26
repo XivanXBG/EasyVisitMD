@@ -1,0 +1,30 @@
+.cardR {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  width: auto;
+  height: auto;
+  margin: 16px;
+  transition: transform 0.2s ease-in-out;
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 16px !important; /* Adjust the gap between cards */
+  justify-content: center !important;
+  align-items: center;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+.info{
+    height: 30px;
+}
+.cardR button:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+
+
+

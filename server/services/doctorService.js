@@ -9,6 +9,7 @@ exports.createDoctor = async (doctorData)=>{
         throw error
     }
 }
+
 exports.findAll = async ()=>{
     try {
         const doctors = Doctor.find();

@@ -1,12 +1,16 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { loadReservations } from "../../services/doctorService";
 import AuthContext from "../../contexts/AuthContext";
 import useForm from "../../hooks/useForm";
+import AppointmentCard from "./appoitment";
 import "./profile.css";
 export default function Profile() {
   const { loadUserInfo, updateUser } = useContext(AuthContext);
   const [userInfo, setUserInfo] = useState();
   const [activeTab, setActiveTab] = useState("profileInfo");
+  const [reservation, setResevations] = useState();
+
   const navigate = useNavigate();
   const submitHandler = () => {
     let name = values.name;
@@ -41,7 +45,11 @@ export default function Profile() {
   }, []);
 
   useEffect(() => {
+    loadReservations(userInfo?._id).then((x) => setResevations(x));
+  }, [userInfo]);
+  useEffect(() => {
     renderContent();
+    console.log(reservation);
   }, [activeTab]); // Add activeTab as a dependency
 
   const switchTab = (tab) => {
@@ -77,17 +85,15 @@ export default function Profile() {
     <div>
       <div className="profile-info">
         <h2>My Reservations</h2>
-        {/* Add your reservations logic here */}
+        <div style={{display:'grid',gridTemplateRows:'repeat(2, 1fr)'}}>
+          {reservation.map((x) => (
+            <AppointmentCard key={x._id} {...x} />
+          ))}
+        </div>
       </div>
     </div>
   );
 
-  const renderPastReservations = () => (
-    <div className="profile-info">
-      <h2>Past Reservations</h2>
-      <h1>ads</h1>
-    </div>
-  );
   const renderEditProfile = () =>
     userInfo && (
       <div className="profile-info">
@@ -122,7 +128,7 @@ export default function Profile() {
               width: "150px",
               padding: "8px",
               color: "white",
-              borderRadius:'10px'
+              borderRadius: "10px",
             }}
           >
             Запиши
@@ -137,8 +143,6 @@ export default function Profile() {
         return renderProfileInfo();
       case "myReservations":
         return renderMyReservations();
-      case "pastReservations":
-        return renderPastReservations();
       case "editProfile":
         return renderEditProfile();
       default:
@@ -161,12 +165,6 @@ export default function Profile() {
           onClick={() => switchTab("myReservations")}
         >
           My Reservations
-        </button>
-        <button
-          className={activeTab === "pastReservations" ? "active" : ""}
-          onClick={() => switchTab("pastReservations")}
-        >
-          Past Reservations
         </button>
       </aside>
       <div className="profile-content">{renderContent()}</div>

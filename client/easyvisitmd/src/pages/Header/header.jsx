@@ -5,7 +5,6 @@ import styles from "./header.module.css";
 
 const Header = () => {
   const { logout, loadUserInfo } = useContext(AuthContext);
-
   const [userInfo, setUserInfo] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -41,11 +40,7 @@ const Header = () => {
               alt="Logo"
             />
           </Link>
-          <div style={{display:'flex',gap:'20px'}}>
-          {userInfo?.role == "ceo" && <Link className={styles.link} to='/users'>Users</Link>}
-          {userInfo?.role == "ceo" && <Link className={styles.link} to='/add-doctor'>Doctor</Link>}
-          </div>
-          
+          <div style={{ display: "flex", gap: "20px" }}></div>
 
           {isAuthenticated && (
             <div className={styles.dropdownContainer}>
@@ -58,8 +53,16 @@ const Header = () => {
               {showDropdown && (
                 <div className={styles.dropdownContent}>
                   <Link to="/profile">Profile</Link>
-                  <Link to="/my-reservations">My Reservations</Link>
-                  <Link to="/past-reservations">Past Reservations</Link>
+                  {userInfo?.role == "ceo" && (
+                    <Link to="/users">
+                      Users
+                    </Link>
+                  )}
+                  {userInfo?.role == "ceo" && (
+                    <Link to="/add-doctor">
+                      Doctor
+                    </Link>
+                  )}
                   <button className={styles.logout} onClick={handleLogout}>
                     Logout
                   </button>
